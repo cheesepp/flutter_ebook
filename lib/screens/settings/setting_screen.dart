@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_book/const/title_text.dart';
+import 'package:flutter_book/screens/settings/components/setting%20sections/change_resource_section.dart';
 import 'package:flutter_book/screens/settings/components/setting%20sections/language_section.dart';
 import 'package:flutter_book/screens/settings/components/setting%20sections/theme_section.dart';
+import 'package:flutter_book/services/resource_service.dart';
+import 'package:flutter_book/widgets/main_drawer.dart';
 import 'package:get/get.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -19,12 +22,14 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   late String _mode;
   late String _language;
+  late String _resourceName;
 
   @override
   void initState() {
     super.initState();
     _language = I18nService().locale == const Locale('vi', 'VN') ? 'vi' : 'en';
     _mode = ThemeService().theme == ThemeMode.dark ? 'dark' : 'light';
+    _resourceName = ResourceService().getResourceName() ?? 'Firebase';
     print(ThemeService().theme);
   }
 
@@ -43,15 +48,15 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   // Theme
-  Future handleChangeMode(String newValue) async {
+  void handleChangeMode(String newValue) {
     if (newValue == 'system') {
-      await ThemeService().switchToSystem();
+      ThemeService().switchToSystem();
     } else if (newValue != _mode) {
       if (newValue == 'dark' && ThemeService().theme == ThemeMode.light) {
-        await ThemeService().switchTheme();
+        ThemeService().switchTheme();
       } else if (newValue == 'light' &&
           ThemeService().theme == ThemeMode.dark) {
-        await ThemeService().switchTheme();
+        ThemeService().switchTheme();
       }
     }
 
@@ -65,7 +70,8 @@ class _SettingScreenState extends State<SettingScreen> {
     final _settingScaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
         key: _settingScaffoldKey,
-        backgroundColor: Color(0xffDED6D6),
+        backgroundColor: Theme.of(context).primaryColor,
+        drawer: const MainDrawer(),
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,13 +82,13 @@ class _SettingScreenState extends State<SettingScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () {
-                        _settingScaffoldKey.currentState?.openDrawer();
-                        print('ok');
-                      },
-                      icon: const ImageIcon(
-                        AssetImage("assets/images/drawer.png"),
-                        color: Colors.black,
+                      onPressed: () =>
+                          _settingScaffoldKey.currentState?.openDrawer(),
+                      icon: ImageIcon(
+                        const AssetImage("assets/images/drawer.png"),
+                        color: ThemeService().theme == ThemeMode.dark
+                            ? Colors.white
+                            : Colors.black,
                       ),
                     ),
                   ],
@@ -106,7 +112,8 @@ class _SettingScreenState extends State<SettingScreen> {
                 mode: _mode,
                 onClick: handleChangeMode,
               ),
-              LanguageSection(lang: _language, onClick: _handleChangeLanguage)
+              LanguageSection(lang: _language, onClick: _handleChangeLanguage),
+              ResourceSection(onClick: (value) {}, resourceName: _resourceName)
             ],
           ),
         ));

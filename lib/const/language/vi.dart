@@ -160,4 +160,8 @@ const Map<String, String> vi = {
   "setting_setting": "Cài đặt",
   "setting_language": "Ngôn ngữ",
   "setting_theme": "Giao diện",
+  "setting_resource": "Tài nguyên sách",
+
+  // Cart Screen
+  "cart": "Giỏ hàng",
 };

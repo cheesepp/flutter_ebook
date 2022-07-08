@@ -164,4 +164,8 @@ const Map<String, String> en = {
   "setting_setting": "Settings",
   "setting_language": "Language",
   "setting_theme": "Theme",
+  "setting_resource": "Books resources",
+
+  // Cart Screen
+  "cart": "Cart",
 };

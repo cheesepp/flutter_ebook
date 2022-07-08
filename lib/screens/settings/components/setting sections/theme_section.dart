@@ -16,6 +16,13 @@ String currentTheme = 'dark_mode'.tr;
 
 class _ThemeSectionState extends State<ThemeSection> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    currentTheme = ThemeService().getTextTheme();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 30, right: 30),
@@ -43,12 +50,14 @@ class _ThemeSectionState extends State<ThemeSection> {
                         widget.onClick('dark');
                         setState(() {
                           currentTheme = "dark_mode".tr;
+                          ThemeService().setTextTheme(currentTheme);
                         });
                       }),
                   onTap: () {
                     widget.onClick('dark');
                     setState(() {
                       currentTheme = 'dark_mode'.tr;
+                      ThemeService().setTextTheme(currentTheme);
                     });
                   }),
               ListTile(
@@ -60,12 +69,14 @@ class _ThemeSectionState extends State<ThemeSection> {
                         widget.onClick('light');
                         setState(() {
                           currentTheme = 'light_mode'.tr;
+                          ThemeService().setTextTheme(currentTheme);
                         });
                       }),
                   onTap: () {
                     widget.onClick('light');
                     setState(() {
                       currentTheme = 'light_mode'.tr;
+                      ThemeService().setTextTheme(currentTheme);
                     });
                   }),
               ListTile(
@@ -77,6 +88,7 @@ class _ThemeSectionState extends State<ThemeSection> {
                       widget.onClick('system');
                       setState(() {
                         currentTheme = 'system_mode'.tr;
+                        ThemeService().setTextTheme(currentTheme);
                       });
                     },
                   ),
@@ -84,6 +96,7 @@ class _ThemeSectionState extends State<ThemeSection> {
                     widget.onClick('system');
                     setState(() {
                       currentTheme = 'system_mode'.tr;
+                      ThemeService().setTextTheme(currentTheme);
                     });
                   }),
             ],

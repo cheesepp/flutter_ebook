@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_book/services/language_service.dart';
+import 'package:flutter_book/services/theme_service.dart';
 import 'package:get/get.dart';
 
 class LanguageSection extends StatefulWidget {
@@ -13,6 +15,13 @@ class LanguageSection extends StatefulWidget {
 String currentLanguage = "en".tr;
 
 class _LanguageSectionState extends State<LanguageSection> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    currentLanguage = I18nService().getTextLang() ?? 'vi'.tr;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,12 +48,14 @@ class _LanguageSectionState extends State<LanguageSection> {
                       widget.onClick('vi');
                       setState(() {
                         currentLanguage = "vi".tr;
+                        I18nService().setTextLang(currentLanguage);
                       });
                     }),
                 onTap: () {
                   widget.onClick('vi');
                   setState(() {
                     currentLanguage = "vi".tr;
+                    I18nService().setTextLang(currentLanguage);
                   });
                 }),
             ListTile(
@@ -56,12 +67,14 @@ class _LanguageSectionState extends State<LanguageSection> {
                       widget.onClick('en');
                       setState(() {
                         currentLanguage = "en".tr;
+                        I18nService().setTextLang(currentLanguage);
                       });
                     }),
                 onTap: () {
                   widget.onClick('en');
                   setState(() {
                     currentLanguage = "en".tr;
+                    I18nService().setTextLang(currentLanguage);
                   });
                 }),
             ListTile(
@@ -73,6 +86,7 @@ class _LanguageSectionState extends State<LanguageSection> {
                     widget.onClick('system');
                     setState(() {
                       currentLanguage = "system_mode".tr;
+                      I18nService().setTextLang(currentLanguage);
                     });
                   },
                 ),
@@ -80,6 +94,7 @@ class _LanguageSectionState extends State<LanguageSection> {
                   widget.onClick('system');
                   setState(() {
                     currentLanguage = "system_mode".tr;
+                    I18nService().setTextLang(currentLanguage);
                   });
                 }),
           ]

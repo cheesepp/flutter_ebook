@@ -5,7 +5,7 @@ class Book {
   String? description;
   int? numberOfFavorite;
   bool isFavorite = false;
-  double rating = 0;
+  dynamic rating = 0;
   int amount;
   String? author;
   int? yearOfPublishcation;
@@ -27,8 +27,10 @@ class Book {
   });
 
   factory Book.fromJson(Map<String, dynamic> json) {
+    // List<dynamic> imgFromJson = [];
+    // json['images'].values((value) => imgFromJson.add(value));
     return Book(
-      images: json['images'].toList(),
+      images: json['images'] as List<dynamic>,
       id: json['id'],
       name: json['name'],
       amount: json['amount'],

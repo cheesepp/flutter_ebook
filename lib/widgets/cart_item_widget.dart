@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../services/theme_service.dart';
 
 class CartItemWidget extends StatelessWidget {
   const CartItemWidget({Key? key}) : super(key: key);
@@ -8,6 +11,7 @@ class CartItemWidget extends StatelessWidget {
     return GestureDetector(
         onTap: () {},
         child: Container(
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
           // margin: const EdgeInsets.only(left: 30),
           height: 250,
           width: MediaQuery.of(context).size.width * 9,
@@ -20,7 +24,9 @@ class CartItemWidget extends StatelessWidget {
                     height: 180.0,
                     width: MediaQuery.of(context).size.width * 0.85,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: ThemeService().theme == ThemeMode.dark
+                          ? const Color(0xff121212)
+                          : Colors.white,
                       borderRadius: BorderRadius.circular(10.0),
                       boxShadow: [
                         BoxShadow(
@@ -85,7 +91,7 @@ class CartItemWidget extends StatelessWidget {
                           Flexible(
                             flex: 2,
                             child: Text(
-                              'Số lượng: 1',
+                              'cart_amount'.tr,
                               style: TextStyle(fontSize: 16),
                             ),
                           ),

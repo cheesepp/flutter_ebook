@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_book/screens/book_details_screen/components/main_image_widget.dart';
+import 'package:flutter_book/services/theme_service.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class BookDetailsScreen extends StatefulWidget {
@@ -115,25 +116,6 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
           ),
         ]),
       );
-  // PreferredSize buildTabBar({
-  //   required VoidCallback onClicked,
-  // }) =>
-  //     PreferredSize(
-  //       preferredSize: Size.fromHeight(40 + 8),
-  //       child: GestureDetector(
-  //         onTap: onClicked,
-  //         child: AppBar(
-  //           title: buildDragIcon(), // Icon(Icons.drag_handle),
-  //           centerTitle: true,
-  //           bottom: TabBar(
-  //             tabs: [
-  //               Tab(child: Text('Vegetarian')),
-  //               Tab(child: Text('Non Vegetarian')),
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //     );
 
   Widget buildDragIcon() => Container(
         decoration: BoxDecoration(
@@ -159,10 +141,12 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [
-                Color(0xFFFCF8E8),
-                Color(0xFFF9F9F9),
-              ],
+              colors: !ThemeService.hasDarkMode()
+                  ? [
+                      Color(0xFFFCF8E8),
+                      Color(0xFFF9F9F9),
+                    ]
+                  : const [Color(0xff504135), Color(0xffeae9ee)],
             )),
         child: Center(
           child: Text(

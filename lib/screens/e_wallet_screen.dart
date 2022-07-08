@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_book/services/theme_service.dart';
 import 'package:flutter_book/widgets/main_drawer.dart';
 import 'package:get/get.dart';
 
@@ -28,9 +29,11 @@ class EWalletScreen extends StatelessWidget {
                     IconButton(
                       onPressed: () =>
                           _eWalletScaffoldKey.currentState?.openDrawer(),
-                      icon: const ImageIcon(
-                        AssetImage("assets/images/drawer.png"),
-                        color: Colors.black,
+                      icon: ImageIcon(
+                        const AssetImage("assets/images/drawer.png"),
+                        color: ThemeService.hasDarkMode()
+                            ? Colors.white
+                            : Colors.black,
                       ),
                     ),
                   ],
@@ -57,13 +60,15 @@ class EWalletScreen extends StatelessWidget {
                       ),
                     ],
                     borderRadius: BorderRadius.circular(15),
-                    gradient: const LinearGradient(
+                    gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [
-                        Color(0xFFFCF8E8),
-                        Color(0xFFF9F9F9),
-                      ],
+                      colors: !ThemeService.hasDarkMode()
+                          ? const [
+                              Color(0xFFFCF8E8),
+                              Color(0xFFF9F9F9),
+                            ]
+                          : const [Color(0xff504135), Color(0xffeae9ee)],
                     )),
                 child: Stack(
                   children: [
@@ -95,7 +100,7 @@ class EWalletScreen extends StatelessWidget {
                     ),
                     Positioned(
                       left: 20,
-                      bottom: 30,
+                      bottom: 20,
                       child: Text('wallet_lastest_updated'.tr),
                     ),
                   ],
@@ -115,38 +120,16 @@ class EWalletScreen extends StatelessWidget {
                 height: 15,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 50),
-                    alignment: Alignment.center,
-                    height: 40,
-                    width: 100,
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      boxShadow: const [
-                        BoxShadow(offset: Offset(3, 4), blurRadius: 10)
-                      ],
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                    ),
-                    child: const Text('22-04-2022'),
+                  const SizedBox(
+                    width: 30,
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(right: 50),
-                    alignment: Alignment.center,
-                    height: 40,
-                    width: 100,
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      boxShadow: const [
-                        BoxShadow(offset: Offset(3, 4), blurRadius: 10)
-                      ],
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                    ),
-                    child: const Text('22-05-2022'),
+                  TimeTransaction('22-04-2022'),
+                  const SizedBox(
+                    width: 20,
                   ),
+                  TimeTransaction('22-05-2022'),
                 ],
               ),
               const SizedBox(
@@ -165,7 +148,9 @@ class EWalletScreen extends StatelessWidget {
                       offset: Offset(0.0, 5.0),
                     ),
                   ],
-                  color: Colors.white,
+                  color: ThemeService().theme == ThemeMode.dark
+                      ? const Color(0xff121212)
+                      : Colors.white,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListView.separated(
@@ -210,6 +195,24 @@ class EWalletScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget TimeTransaction(String text) {
+    return Container(
+      margin: const EdgeInsets.only(right: 50),
+      alignment: Alignment.center,
+      height: 40,
+      width: 100,
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        boxShadow: const [BoxShadow(offset: Offset(3, 4), blurRadius: 10)],
+        borderRadius: BorderRadius.circular(10),
+        color: ThemeService().theme == ThemeMode.dark
+            ? const Color(0xff121212)
+            : Colors.white,
+      ),
+      child: Text(text),
     );
   }
 }

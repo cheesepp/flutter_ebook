@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_book/screens/cart_screen.dart';
 import 'package:flutter_book/screens/home_screen/home_screen.dart';
 import 'package:flutter_book/screens/settings/setting_screen.dart';
+import 'package:get/get.dart';
 
 import '../screens/e_wallet_screen.dart';
+import '../services/theme_service.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key? key}) : super(key: key);
@@ -16,7 +18,9 @@ class MainDrawer extends StatelessWidget {
         child: Icon(
           icon,
           size: 26,
-          color: Colors.black,
+          color: ThemeService().theme == ThemeMode.dark
+              ? Colors.white
+              : Colors.black,
         ),
       ),
       title: Text(
@@ -106,46 +110,39 @@ class MainDrawer extends StatelessWidget {
         child: Column(
           children: <Widget>[
             headerWidget(context),
-            // Container(
-            //   height: 120,
-            //   width: double.infinity,
-            //   padding: EdgeInsets.all(20),
-            //   alignment: Alignment.centerLeft,
-            //   color: Theme.of(context).accentColor,
-            //   child: Text(
-            //     'Cooking Up!',
-            //     style: TextStyle(
-            //         fontWeight: FontWeight.w900,
-            //         fontSize: 30,
-            //         color: Theme.of(context).primaryColor),
-            //   ),
-            // ),
-            const Divider(
-              thickness: 4,
+            Divider(
+              thickness: 1,
+              color: ThemeService().theme == ThemeMode.dark
+                  ? Colors.white
+                  : Colors.black,
             ),
-            buildListTile('Trang chủ', Icons.home, () {
+            buildListTile('drawer_home'.tr, Icons.home, () {
               Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
             }),
-            buildListTileFoCart('Giỏ hàng', () {
+            buildListTileFoCart('drawer_cart'.tr, () {
               Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
             }),
-            buildListTile('Tài khoản', Icons.account_circle, () {
+            buildListTile('drawer_account'.tr, Icons.account_circle, () {
               Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
             }),
-            buildListTile('Cài đặt', Icons.settings, () {
+            buildListTile('drawer_settings'.tr, Icons.settings, () {
               Navigator.of(context)
                   .pushReplacementNamed(SettingScreen.routeName);
             }),
-            buildListTile('Ví điện tử', Icons.wallet_membership_rounded, () {
+            buildListTile('drawer_wallet'.tr, Icons.wallet_membership_rounded,
+                () {
               Navigator.of(context).pushNamed(EWalletScreen.routeName);
             }),
-            const Divider(
-              thickness: 4,
+            Divider(
+              thickness: 1,
+              color: ThemeService().theme == ThemeMode.dark
+                  ? Colors.white
+                  : Colors.black,
             ),
-            buildListTile('About', Icons.info, () {
+            buildListTile('drawer_about'.tr, Icons.info, () {
               Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
             }),
-            buildListTile('Logout', Icons.logout, () {
+            buildListTile('drawer_log_out'.tr, Icons.logout, () {
               Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
             }),
           ],
@@ -187,14 +184,24 @@ class MainDrawer extends StatelessWidget {
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Text('Trần Đình Nhật Trí',
-                    style: TextStyle(fontSize: 15, color: Colors.black)),
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: ThemeService().theme == ThemeMode.dark
+                          ? Colors.white
+                          : Colors.black,
+                    )),
                 SizedBox(
                   height: 5,
                 ),
                 Text('person@email.com',
-                    style: TextStyle(fontSize: 15, color: Colors.black)),
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: ThemeService().theme == ThemeMode.dark
+                          ? Colors.white
+                          : Colors.black,
+                    )),
               ],
             )
           ],

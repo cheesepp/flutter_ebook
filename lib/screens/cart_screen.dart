@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_book/const/title_text.dart';
 import 'package:flutter_book/widgets/cart_item_widget.dart';
 import 'package:flutter_book/widgets/main_drawer.dart';
+import 'package:get/get.dart';
+
+import '../services/theme_service.dart';
 
 class CartScreen extends StatefulWidget {
   CartScreen({Key? key}) : super(key: key);
@@ -32,19 +35,21 @@ class _CartScreenState extends State<CartScreen> {
                   IconButton(
                     onPressed: () =>
                         _cartScaffoldKey.currentState?.openDrawer(),
-                    icon: const ImageIcon(
-                      AssetImage("assets/images/drawer.png"),
-                      color: Colors.black,
+                    icon: ImageIcon(
+                      const AssetImage("assets/images/drawer.png"),
+                      color: ThemeService().theme == ThemeMode.dark
+                          ? Colors.white
+                          : Colors.black,
                     ),
                   ),
                 ],
               ),
             ),
-            TitleText.headlineLarge(context, text: 'Giỏ Hàng'),
+            TitleText.headlineLarge(context, text: 'cart'.tr),
             const SizedBox(
               height: 20,
             ),
-            CartItemWidget(),
+            const CartItemWidget(),
           ],
         ),
       ),

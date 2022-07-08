@@ -6,9 +6,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class I18nService extends Translations {
-  static final _storage = GetStorage();
   static SharedPreferences? _preference;
   String _languageKey = 'lang';
+  String _langTextKey = 'vi';
   static const fallbackLocale = Locale('en', 'US');
 
   static final Map<String, Locale> locales = {
@@ -30,12 +30,11 @@ class I18nService extends Translations {
     return locales[value] ?? fallbackLocale;
   }
 
+  setTextLang(String text) => _preference!.setString(_langTextKey, text);
+  getTextLang() => _preference!.getString(_langTextKey);
+
   Future setLanguage(String lang) async {
     await _preference!.setString(_languageKey, lang);
-  }
-
-  void _saveToStorage(String lang) {
-    _storage.write('lang', lang);
   }
 
   void changeLocale(String lang) {

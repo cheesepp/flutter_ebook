@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_book/services/fetch_data.dart';
 
+import '../api/books_api.dart';
+import '../models/book.dart';
+
 class BooksListView extends StatelessWidget {
   const BooksListView({
     Key? key,
     required this.fetch,
   }) : super(key: key);
 
-  final FetchData fetch;
+  final List<Book> fetch;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +45,7 @@ class BooksListView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     child: Image.network(
                       // "assets/images/0.jfif",
-                      fetch.books[index].images[0],
+                      fetch[0].images[1],
                       fit: BoxFit.fitHeight,
                     ),
                   ),
@@ -54,7 +57,7 @@ class BooksListView extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 3),
                 child: Text(
-                  fetch.books[index].name,
+                  fetch[0].name,
                   style: Theme.of(context)
                       .textTheme
                       .labelMedium!

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../../services/theme_service.dart';
+
 class MainImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(
-                'http://papers.co/wallpaper/papers.co-sa52-blurred-white-blur-wallpaper-4-wallpaper.jpg'),
+            image: AssetImage(ThemeService.hasDarkMode()
+                ? 'assets/images/dark_background.jpg'
+                : 'assets/images/light_background.jpg'),
             fit: BoxFit.cover,
           ),
         ),

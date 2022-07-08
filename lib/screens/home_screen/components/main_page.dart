@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../api/books_api.dart';
 import '../../../const/title_text.dart';
 import '../../../services/fetch_data.dart';
 import '../../../widgets/books_listview.dart';
 import '../../../widgets/images_slider.dart';
 
 class MainPage extends StatelessWidget {
-  const MainPage({
-    Key? key,
-    required this.fetch,
-  }) : super(key: key);
+  const MainPage({Key? key, required this.fetch, required this.api})
+      : super(key: key);
 
   final FetchData fetch;
+  final API api;
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +33,14 @@ class MainPage extends StatelessWidget {
             height: 20,
           ),
           FutureBuilder(
-              future: fetch.fetchBooks(context),
+              future: api.fetchAllBooks(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
                 } else {
-                  return BooksListView(fetch: fetch);
+                  return BooksListView(fetch: api.books);
                 }
               }),
           const SizedBox(

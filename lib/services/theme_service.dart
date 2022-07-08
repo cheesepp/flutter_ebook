@@ -9,7 +9,7 @@ class ThemeService {
   static bool isDarkMode = false;
   static SharedPreferences? _preference;
   final _key = 'isDarkMode';
-
+  final _textThemeKey = 'light_mode'.tr;
   static Future init() async {
     _preference = await SharedPreferences.getInstance();
   }
@@ -20,27 +20,34 @@ class ThemeService {
 
   ThemeMode get theme => _loadFromStorage() ? ThemeMode.dark : ThemeMode.light;
 
+  static bool hasDarkMode() => ThemeService().theme == ThemeMode.dark;
+
+  Future setTextTheme(String text) async =>
+      await _preference!.setString(_textThemeKey, text);
+
+  getTextTheme() => _preference!.getString(_textThemeKey) ?? 'light_mode'.tr;
+
   bool _loadFromStorage() {
     return _preference!.getBool(_key) ?? false;
   }
 
   /// Switch theme and save to local storage
 
-  Future switchTheme() async {
+  void switchTheme() {
     _loadFromStorage()
         ? Get.changeThemeMode(ThemeMode.light)
         : Get.changeThemeMode(ThemeMode.dark);
 
-    await setThemeMode(!_loadFromStorage());
+    setThemeMode(!_loadFromStorage());
   }
 
-  Future switchToSystem() async {
+  void switchToSystem() {
     Get.changeThemeMode(ThemeMode.system);
 
     if (ThemeMode.system == ThemeMode.dark) {
-      await setThemeMode(true);
+      setThemeMode(true);
     } else {
-      await setThemeMode(false);
+      setThemeMode(false);
     }
   }
 }
