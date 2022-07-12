@@ -47,8 +47,8 @@ class CategoryItemsScreen extends StatelessWidget {
           itemCount: 5,
           itemBuilder: (context, index) => GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => BookDetailsScreen()));
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => BookDetailsScreen()));
             },
             child: Column(
               children: [

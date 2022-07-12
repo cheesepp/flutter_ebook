@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_book/models/book.dart';
+import 'package:flutter_book/screens/book_details_screen/book_details_screen.dart';
 import 'package:flutter_book/screens/cart_screen.dart';
 import 'package:flutter_book/screens/category_items.dart';
 import 'package:flutter_book/screens/e_wallet_screen.dart';

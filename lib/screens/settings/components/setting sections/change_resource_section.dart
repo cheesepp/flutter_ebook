@@ -99,19 +99,20 @@ class _ResourceSectionState extends State<ResourceSection> {
                                 padding: const EdgeInsets.all(20.0),
                                 child: Column(
                                   children: [
-                                    const Text(
-                                      'Add Task',
-                                      style: TextStyle(fontSize: 24),
+                                    Text(
+                                      'resource_add_resource'.tr,
+                                      style: const TextStyle(fontSize: 24),
                                     ),
                                     const SizedBox(
-                                      height: 10,
+                                      height: 20,
                                     ),
                                     TextField(
                                       autofocus: true,
                                       controller: resourceNameController,
-                                      decoration: const InputDecoration(
-                                          label: Text('Resource'),
-                                          border: OutlineInputBorder()),
+                                      decoration: InputDecoration(
+                                          label: Text(
+                                              'resource_resource_field'.tr),
+                                          border: const OutlineInputBorder()),
                                     ),
                                     const SizedBox(
                                       height: 30,
@@ -119,39 +120,59 @@ class _ResourceSectionState extends State<ResourceSection> {
                                     TextField(
                                       autofocus: true,
                                       controller: resourceController,
-                                      minLines: 3,
-                                      maxLines: 5,
-                                      decoration: const InputDecoration(
-                                          label: Text('Domain'),
-                                          border: OutlineInputBorder()),
+                                      decoration: InputDecoration(
+                                          label:
+                                              Text('resource_domain_field'.tr),
+                                          border: const OutlineInputBorder()),
                                     ),
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.of(context).pop(),
-                                      child: const Text('cancel'),
+                                    const SizedBox(
+                                      height: 10,
                                     ),
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          var task = {
-                                            resourceNameController.text:
-                                                resourceController.text
-                                          };
-                                          setState(() {
-                                            resources.addAll(task);
-                                            ResourceService()
-                                                .setMap(jsonEncode(resources));
-                                          });
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.of(context).pop(),
+                                          child: Text('resource_cancel'.tr),
+                                        ),
+                                        const SizedBox(
+                                          width: 30,
+                                        ),
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              var task = {
+                                                resourceNameController.text:
+                                                    resourceController.text
+                                              };
+                                              setState(() {
+                                                resources.addAll(task);
+                                                ResourceService().setMap(
+                                                    jsonEncode(resources));
+                                              });
 
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Text('Add'))
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text('resource_add'.tr)),
+                                      ],
+                                    )
                                   ],
                                 ),
                               ),
                             ),
                           ));
                 },
-                child: Text('Add Resource')),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.add),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text('resource_add_resource'.tr),
+                  ],
+                )),
           ]),
         ],
       ),

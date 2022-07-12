@@ -161,7 +161,16 @@ const Map<String, String> vi = {
   "setting_language": "Ngôn ngữ",
   "setting_theme": "Giao diện",
   "setting_resource": "Tài nguyên sách",
-
+  //resource section
+  "resource_add_resource": "Thêm nguồn sách",
+  "resource_add": "Thêm",
+  "resource_cancel": "Hủy",
+  "resource_resource_field": "Tên nguồn",
+  "resource_domain_field": "Miền",
   // Cart Screen
   "cart": "Giỏ hàng",
+
+  // Book Detail Screen
+  "detail_buy_btn": "Mua ngay",
+  "detail_cart_btn": "Thêm vào giỏ hàng",
 };

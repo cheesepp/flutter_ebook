@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_book/const/title_text.dart';
+import 'package:flutter_book/screens/home_screen/components/search_page.dart';
 import 'package:flutter_book/screens/home_screen/components/categories_page.dart';
+import 'package:flutter_book/services/books_service.dart';
 import 'package:flutter_book/services/fetch_data.dart';
 import 'package:flutter_book/services/resource_service.dart';
 import 'package:flutter_book/widgets/books_listview.dart';
@@ -30,14 +32,26 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   var _homeScaffoldKey = GlobalKey<ScaffoldState>();
-  var fetch = FetchData();
-  var api = API();
+  var booksService = BooksService();
+  bool hasDownloaded = false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    api.baseUrl = ResourceService().getResource() ??
+    booksService.api.baseUrl = ResourceService().getResource() ??
         'https://ebook-mockdata-default-rtdb.firebaseio.com/';
+  }
+
+  @override
+  void didChangeDependencies() async {
+    hasDownloaded = false;
+    print(hasDownloaded);
+    await booksService.fetchData();
+    print(hasDownloaded);
+    setState(() {
+      hasDownloaded = true;
+    });
+    super.didChangeDependencies();
   }
 
   @override
@@ -90,7 +104,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           ]),
 
                       IconButton(
-                        onPressed: () => Scaffold.of(context).openDrawer(),
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => const SearchPage()))),
                         icon: Icon(
                           Icons.search,
                           color: ThemeService().theme == ThemeMode.dark
@@ -105,16 +122,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
             ];
           },
-          body: TabBarView(
-            controller: _tabController,
-            children: [
-              MainPage(
-                fetch: fetch,
-                api: api,
-              ),
-              const CategoriesPage(),
-            ],
-          ),
+          body: hasDownloaded
+              ? TabBarView(
+                  controller: _tabController,
+                  children: [
+                    MainPage(
+                      booksService: booksService,
+                    ),
+                    const CategoriesPage(),
+                  ],
+                )
+              : const Center(
+                  child: CircularProgressIndicator(),
+                ),
         ),
       ),
     );

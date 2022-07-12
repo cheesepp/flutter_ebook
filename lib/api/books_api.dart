@@ -24,4 +24,16 @@ class API {
       print(e);
     }
   }
+
+  Future<List<Book>> searchBooks(String query) async {
+    await fetchAllBooks();
+    return books.where((book) {
+      final titleLower = book.name.toLowerCase();
+      final authorLower = book.author!.toLowerCase();
+      final searchLower = query.toLowerCase();
+
+      return titleLower.contains(searchLower) ||
+          authorLower.contains(searchLower);
+    }).toList();
+  }
 }

@@ -19,7 +19,7 @@ class _LanguageSectionState extends State<LanguageSection> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    currentLanguage = I18nService().getTextLang() ?? 'vi'.tr;
+    currentLanguage = I18nService().getTextLang() ?? 'en'.tr;
   }
 
   @override

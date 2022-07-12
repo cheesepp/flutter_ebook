@@ -165,7 +165,17 @@ const Map<String, String> en = {
   "setting_language": "Language",
   "setting_theme": "Theme",
   "setting_resource": "Books resources",
-
+  //resource section
+  "resource_add_resource": "Add Resource",
+  "resource_add": "Add",
+  "resource_cancel": "Cancel",
+  "resource_resource_field": "Resource",
+  "resource_domain_field": "Domain",
   // Cart Screen
   "cart": "Cart",
+
+  // Book Detail Screen
+  // Book Detail Screen
+  "detail_buy_btn": "Buy now",
+  "detail_cart_btn": "Add to cart",
 };

@@ -72,49 +72,53 @@ class _SettingScreenState extends State<SettingScreen> {
         key: _settingScaffoldKey,
         backgroundColor: Theme.of(context).primaryColor,
         drawer: const MainDrawer(),
-        body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: () =>
-                          _settingScaffoldKey.currentState?.openDrawer(),
-                      icon: ImageIcon(
-                        const AssetImage("assets/images/drawer.png"),
-                        color: ThemeService().theme == ThemeMode.dark
-                            ? Colors.white
-                            : Colors.black,
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        onPressed: () =>
+                            _settingScaffoldKey.currentState?.openDrawer(),
+                        icon: ImageIcon(
+                          const AssetImage("assets/images/drawer.png"),
+                          color: ThemeService().theme == ThemeMode.dark
+                              ? Colors.white
+                              : Colors.black,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Row(
-                  // crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    ImageIcon(
-                      AssetImage('assets/images/setting.png'),
-                      size: 50,
-                    ),
-                    TitleText.headlineLarge(context,
-                        text: 'setting_setting'.tr, padding: 10),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 30),
+                  child: Row(
+                    // crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      ImageIcon(
+                        AssetImage('assets/images/setting.png'),
+                        size: 50,
+                      ),
+                      TitleText.headlineLarge(context,
+                          text: 'setting_setting'.tr, padding: 10),
+                    ],
+                  ),
                 ),
-              ),
-              ThemeSection(
-                mode: _mode,
-                onClick: handleChangeMode,
-              ),
-              LanguageSection(lang: _language, onClick: _handleChangeLanguage),
-              ResourceSection(onClick: (value) {}, resourceName: _resourceName)
-            ],
+                ThemeSection(
+                  mode: _mode,
+                  onClick: handleChangeMode,
+                ),
+                LanguageSection(
+                    lang: _language, onClick: _handleChangeLanguage),
+                ResourceSection(
+                    onClick: (value) {}, resourceName: _resourceName)
+              ],
+            ),
           ),
         ));
   }

@@ -7,6 +7,7 @@ class Book {
   bool isFavorite = false;
   dynamic rating = 0;
   int amount;
+  int purchases = 0;
   String? author;
   int? yearOfPublishcation;
   String? authorSurname;
@@ -16,6 +17,7 @@ class Book {
     required this.id,
     required this.name,
     this.description,
+    required this.purchases,
     this.numberOfFavorite,
     required this.isFavorite,
     required this.rating,
@@ -34,6 +36,7 @@ class Book {
       id: json['id'],
       name: json['name'],
       amount: json['amount'],
+      purchases: json['purchases'],
       description: json['description'],
       isFavorite: json['isFavorite'],
       rating: json['rating'],
@@ -51,6 +54,7 @@ class Book {
         'amount': amount,
         'description': description,
         'isFavorite': isFavorite,
+        'purchases': purchases,
         'rating': rating,
         'author': author,
         'authorSurname': authorSurname,
@@ -58,4 +62,21 @@ class Book {
         'numberOfFavorite': numberOfFavorite,
         'yearOfPublishcation': yearOfPublishcation,
       };
+
+  @override
+  String toString() {
+    return '''
+id: $id,
+name: $name
+amount: $amount
+description: $description
+isFavorite: $isFavorite
+purchases: $purchases
+rating: $rating
+author: $author
+authorSurname: $authorSurname
+pages: $pages
+numberOfFavorite: $numberOfFavorite
+yearOfPublishcation: $yearOfPublishcation ---''';
+  }
 }

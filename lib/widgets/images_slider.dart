@@ -34,7 +34,7 @@ class ImagesSlider extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 child: const Image(
                   image: NetworkImage(
-                      'https://pennbookcenter.com/wp-content/uploads/2021/10/Best-Programming-Books-2021-Reviews.jpg'),
+                      'https://static.remove.bg/remove-bg-web/5c20d2ecc9ddb1b6c85540a333ec65e2c616dbbd/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg'),
                   fit: BoxFit.cover,
                 ),
               )),
