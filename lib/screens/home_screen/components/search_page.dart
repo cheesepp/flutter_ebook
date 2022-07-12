@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_book/const/title_text.dart';
+import 'package:get/get.dart';
 
 import '../../../api/books_api.dart';
 import '../../../models/book.dart';
@@ -68,7 +69,7 @@ class _SearchPageState extends State<SearchPage> {
                         },
                         icon: const Icon(Icons.arrow_back_ios)),
                     TitleText.headlineLarge(context,
-                        text: 'Search', padding: 5),
+                        text: 'search_page'.tr, padding: 5),
                   ],
                 ),
                 buildSearch(),
@@ -89,7 +90,7 @@ class _SearchPageState extends State<SearchPage> {
 
   Widget buildSearch() => SearchWidget(
         text: query,
-        hintText: 'Title or Author Name',
+        hintText: 'search_page_hint'.tr,
         onChanged: searchBook,
       );
 

@@ -149,6 +149,8 @@ const Map<String, String> vi = {
   "home_most_fav": "Được yêu thích nhất",
   "home_read_books": "Sách đã đọc",
   "home_friends_book": "Sách của bạn bè",
+  "search_page": 'Tìm kiếm',
+  "search_page_hint": "Nhập tên sách hoặc tên tác giả",
 
   // E-Wallet Screen
   "wallet_my_wallet": "Ví điện tử",

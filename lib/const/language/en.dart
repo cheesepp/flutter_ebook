@@ -153,6 +153,8 @@ const Map<String, String> en = {
   "home_most_fav": "Most Favorite",
   "home_read_books": "Read Books",
   "home_friends_book": "Friends' Books",
+  "search_page": "Search",
+  "search_page_hint": "Title or Author Name",
 
   // E-Wallet Screen
   "wallet_my_wallet": "My Wallet",
