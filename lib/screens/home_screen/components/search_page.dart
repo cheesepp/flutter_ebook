@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_book/const/title_text.dart';
+import 'package:flutter_book/screens/book_details_screen/book_details_screen.dart';
 import 'package:get/get.dart';
 
 import '../../../api/books_api.dart';
@@ -105,22 +106,30 @@ class _SearchPageState extends State<SearchPage> {
         });
       });
 
-  Widget buildBook(Book book) => ListTile(
-        leading: AspectRatio(
-          aspectRatio: 2 / 3,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              book.images[0],
-              fit: BoxFit.fitHeight,
+  Widget buildBook(Book book) => GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: ((context) => BookDetailsScreen(book: book))));
+        },
+        child: ListTile(
+          leading: AspectRatio(
+            aspectRatio: 2 / 3,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                book.images[0],
+                fit: BoxFit.fitHeight,
+              ),
             ),
           ),
+          title: Text(
+            book.name,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          subtitle: Text(book.author!),
         ),
-        title: Text(
-          book.name,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        subtitle: Text(book.author!),
       );
 }

@@ -30,7 +30,6 @@ class _SettingScreenState extends State<SettingScreen> {
     _language = I18nService().locale == const Locale('vi', 'VN') ? 'vi' : 'en';
     _mode = ThemeService().theme == ThemeMode.dark ? 'dark' : 'light';
     _resourceName = ResourceService().getResourceName() ?? 'Firebase';
-    print(ThemeService().theme);
   }
 
   // Language
