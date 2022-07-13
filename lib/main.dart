@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
       translations: I18nService(),
       locale: I18nService().locale,
       fallbackLocale: I18nService.fallbackLocale,
-      home: isOnboarding ? const OnboardingScreen() : HomeScreen(),
+      home: isOnboarding ? const OnboardingScreen() : const OnboardingScreen(),
       routes: {
         HomeScreen.routeName: (ctx) => HomeScreen(),
         CartScreen.routeName: (ctx) => CartScreen(),

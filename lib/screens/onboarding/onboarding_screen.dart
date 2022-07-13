@@ -34,14 +34,30 @@ class OnboardingScreen extends StatelessWidget {
         Navigator.pushNamed(context, HomeScreen.routeName);
       },
       showBackButton: true,
-      back: const Icon(Icons.arrow_back_sharp),
-      skip: const Text("Skip"),
-      next: const Icon(Icons.arrow_forward_outlined),
-      done: const Text("Done", style: TextStyle(fontWeight: FontWeight.w600)),
+      back: const Icon(
+        Icons.arrow_back_sharp,
+        color: Colors.black,
+      ),
+      skip: const Text("Skip",
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+      next: const Icon(Icons.arrow_forward_outlined, color: Colors.black),
+      done: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: const Center(
+          child: Text("Get Started!",
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+        ),
+      ),
       dotsDecorator: DotsDecorator(
         size: const Size.square(10.0),
         activeSize: const Size(20.0, 10.0),
-        color: Colors.black26,
+        activeColor: Colors.black,
+        color: Colors.black38,
         spacing: const EdgeInsets.symmetric(horizontal: 3.0),
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25.0),
