@@ -8,6 +8,7 @@ import 'package:flutter_book/screens/home_screen/home_screen.dart';
 import 'package:flutter_book/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter_book/screens/settings/components/setting%20sections/change_resource_section.dart';
 import 'package:flutter_book/screens/settings/setting_screen.dart';
+import 'package:flutter_book/screens/signin_screen.dart';
 import 'package:flutter_book/screens/test.dart';
 import 'package:flutter_book/services/resource_service.dart';
 import 'package:flutter_book/services/theme_service.dart';
@@ -54,7 +55,7 @@ class _MyAppState extends State<MyApp> {
       translations: I18nService(),
       locale: I18nService().locale,
       fallbackLocale: I18nService.fallbackLocale,
-      home: isOnboarding ? const OnboardingScreen() : const OnboardingScreen(),
+      home: isOnboarding ? const OnboardingScreen() : const SignInScreen(),
       routes: {
         HomeScreen.routeName: (ctx) => HomeScreen(),
         CartScreen.routeName: (ctx) => CartScreen(),
