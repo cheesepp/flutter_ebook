@@ -124,16 +124,6 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  IconButton(
-                    // ignore: prefer_const_constructors
-                    icon: Icon(Icons.apple),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
             ],
           ),
         ),

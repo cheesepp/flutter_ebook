@@ -16,6 +16,7 @@ import 'package:get/get.dart';
 
 import '../../api/books_api.dart';
 import '../../services/theme_service.dart';
+import '../../widgets/circular_tab_indicator.dart';
 import 'components/main_page.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -91,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           unselectedLabelColor: Colors.grey,
                           isScrollable: true,
                           indicatorSize: TabBarIndicatorSize.label,
-                          indicator: _CircleTabIndicator(
+                          indicator: CircleTabIndicator(
                               color: ThemeService().theme == ThemeMode.dark
                                   ? Colors.white
                                   : Colors.black,
@@ -138,36 +139,5 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ),
       ),
     );
-  }
-}
-
-class _CircleTabIndicator extends Decoration {
-  final Color color;
-  double radius;
-
-  _CircleTabIndicator({required this.color, required this.radius});
-
-  @override
-  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
-    // TODO: implement createBoxPainter
-    return _CirclePainter(color: color, radius: radius);
-  }
-}
-
-class _CirclePainter extends BoxPainter {
-  final Color color;
-  double radius;
-
-  _CirclePainter({required this.color, required this.radius});
-
-  @override
-  void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
-    Paint _paint = Paint();
-    _paint.color = color;
-    _paint.isAntiAlias = true;
-    final Offset circleOffset = Offset(
-        configuration.size!.width / 2 - radius / 2,
-        configuration.size!.height - radius);
-    canvas.drawCircle(offset + circleOffset, radius, _paint);
   }
 }

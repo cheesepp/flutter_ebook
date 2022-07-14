@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_book/models/book.dart';
+import 'package:flutter_book/screens/auth_screen/auth_screen.dart';
 import 'package:flutter_book/screens/book_details_screen/book_details_screen.dart';
 import 'package:flutter_book/screens/cart_screen.dart';
 import 'package:flutter_book/screens/category_items.dart';
@@ -55,7 +56,7 @@ class _MyAppState extends State<MyApp> {
       translations: I18nService(),
       locale: I18nService().locale,
       fallbackLocale: I18nService.fallbackLocale,
-      home: isOnboarding ? const OnboardingScreen() : const SignInScreen(),
+      home: isOnboarding ? const OnboardingScreen() : AuthScreen(),
       routes: {
         HomeScreen.routeName: (ctx) => HomeScreen(),
         CartScreen.routeName: (ctx) => CartScreen(),
