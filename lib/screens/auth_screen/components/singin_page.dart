@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class SignInPage extends StatefulWidget {
   SignInPage({Key? key, required this.onClicked}) : super(key: key);
@@ -37,7 +38,7 @@ class _SignInPageState extends State<SignInPage> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: ElevatedButton(
-                child: const Text('Sign in',
+                child: const Text('Sign in!',
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 style: ElevatedButton.styleFrom(
@@ -51,16 +52,12 @@ class _SignInPageState extends State<SignInPage> {
                 onPressed: () {},
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(
-                  // ignore: prefer_const_constructors
-                  icon: Icon(
-                    Icons.home,
-                  ),
-                  onPressed: () {},
-                ),
                 Text.rich(
                   TextSpan(children: [
                     const TextSpan(text: 'Do not have an account? '),
@@ -74,6 +71,48 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ],
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Divider(
+              thickness: 3,
+              endIndent: 100,
+              indent: 100,
+              color: Colors.black12,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                IconButton(
+                  onPressed: () {},
+                  icon: ImageIcon(
+                    AssetImage('assets/images/twitter.png'),
+                    color: Colors.blue,
+                  ),
+                  color: Colors.white,
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: ImageIcon(
+                    AssetImage('assets/images/google.png'),
+                    color: Colors.red,
+                  ),
+                  color: Colors.white,
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: ImageIcon(
+                    AssetImage('assets/images/facebook.png'),
+                    size: 28,
+                    color: Color(0xff3b5998),
+                  ),
+                  color: Colors.white,
+                ),
+              ],
+            )
           ],
         ),
       ),

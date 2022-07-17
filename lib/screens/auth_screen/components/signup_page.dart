@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_book/screens/home_screen/home_screen.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -71,7 +72,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: ElevatedButton(
-                child: const Text('Sign up',
+                child: const Text('Sign up!',
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 style: ElevatedButton.styleFrom(
@@ -82,9 +83,53 @@ class _SignUpPageState extends State<SignUpPage> {
                     onPrimary: Colors.white,
                     fixedSize: const Size(200,
                         60)), //El ancho de deja en 0 porque el "expanded" lo define.
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed(HomeScreen.routeName);
+                },
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Divider(
+              thickness: 3,
+              endIndent: 100,
+              indent: 100,
+              color: Colors.black12,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                IconButton(
+                  onPressed: () {},
+                  icon: ImageIcon(
+                    AssetImage('assets/images/twitter.png'),
+                    color: Colors.blue,
+                  ),
+                  color: Colors.white,
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: ImageIcon(
+                    AssetImage('assets/images/google.png'),
+                    color: Colors.red,
+                  ),
+                  color: Colors.white,
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: ImageIcon(
+                    AssetImage('assets/images/facebook.png'),
+                    size: 28,
+                    color: Color(0xff3b5998),
+                  ),
+                  color: Colors.white,
+                ),
+              ],
+            )
           ],
         ),
       ),
