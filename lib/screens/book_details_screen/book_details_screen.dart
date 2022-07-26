@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_book/providers/cart_provider.dart';
 import 'package:flutter_book/screens/book_details_screen/components/main_image_widget.dart';
 import 'package:flutter_book/services/theme_service.dart';
 import 'package:get/get.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
+import 'package:provider/provider.dart';
 import '../../models/book.dart';
 
 class BookDetailsScreen extends StatefulWidget {
@@ -49,6 +50,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
   final double tabBarHeight = 80;
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<CartProvider>(context);
     // final images = ['assets/images/test1.jpg', 'assets/images/test2.jpg'];
     _scale = 1 - _controller!.value;
     return Scaffold(
@@ -56,6 +58,48 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          Container(
+            height: 50.0,
+            width: 50.0,
+            child: GestureDetector(
+                onTap: () {},
+                child: Stack(
+                  children: <Widget>[
+                    const IconButton(
+                      icon: Icon(
+                        Icons.shopping_cart,
+                        color: Colors.black,
+                      ),
+                      onPressed: null,
+                    ),
+                    Positioned(
+                      child: Stack(
+                        children: [
+                          Positioned(
+                              left: 26,
+                              top: 0,
+                              child: Icon(Icons.brightness_1,
+                                  size: 20.0, color: Colors.red)),
+                          Positioned(
+                              top: 2.0,
+                              right: 10,
+                              child: Center(
+                                child: Text(
+                                  cart.items.length.toString(),
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 11.0,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              )),
+                        ],
+                      ),
+                    ),
+                  ],
+                )),
+          ),
+        ],
       ),
       body: Stack(
         children: [
@@ -77,7 +121,8 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
               child: Transform.scale(
                 scale: _scale!,
                 child: _animatedButtonUI('detail_cart_btn'.tr, () {
-                  print('clicked add to cart button!');
+                  cart.addItem(widget.book.id, widget.book.price,
+                      widget.book.name, widget.book.images[0]);
                 }),
               ),
             ),
@@ -145,8 +190,22 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
               ),
               Container(
                 margin: const EdgeInsets.only(right: 150),
-                child: Text('pro',
+                child: Text(widget.book.name,
                     style: TextStyle(fontSize: 20),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text('Description'),
+              const SizedBox(
+                height: 15,
+              ),
+              Container(
+                margin: const EdgeInsets.only(right: 150),
+                child: Text(widget.book.description!,
+                    style: TextStyle(fontSize: 15),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis),
               ),

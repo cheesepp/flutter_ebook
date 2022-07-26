@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_book/providers/cart_provider.dart';
 import 'package:flutter_book/screens/cart_screen.dart';
 import 'package:flutter_book/screens/home_screen/home_screen.dart';
 import 'package:flutter_book/screens/settings/setting_screen.dart';
 import 'package:get/get.dart';
-
+import 'package:provider/provider.dart';
 import '../screens/e_wallet_screen.dart';
 import '../services/theme_service.dart';
 
@@ -35,7 +36,8 @@ class MainDrawer extends StatelessWidget {
     );
   }
 
-  Widget buildListTileFoCart(String title, Function tapHandler) {
+  Widget buildListTileForCart(
+      String title, Function tapHandler, BuildContext context) {
     return ListTile(
       leading: Container(
         height: 50.0,
@@ -53,7 +55,7 @@ class MainDrawer extends StatelessWidget {
                 ),
                 Positioned(
                   child: Stack(
-                    children: const [
+                    children: [
                       Positioned(
                           left: 26,
                           top: 0,
@@ -64,7 +66,10 @@ class MainDrawer extends StatelessWidget {
                           right: 10,
                           child: Center(
                             child: Text(
-                              '1',
+                              Provider.of<CartProvider>(context)
+                                  .items
+                                  .length
+                                  .toString(),
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 11.0,
@@ -119,9 +124,9 @@ class MainDrawer extends StatelessWidget {
             buildListTile('drawer_home'.tr, Icons.home, () {
               Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
             }),
-            buildListTileFoCart('drawer_cart'.tr, () {
+            buildListTileForCart('drawer_cart'.tr, () {
               Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
-            }),
+            }, context),
             buildListTile('drawer_account'.tr, Icons.account_circle, () {
               Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
             }),

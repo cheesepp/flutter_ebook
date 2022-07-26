@@ -40,4 +40,14 @@ class BooksService {
     final mostFavoriteBooks = books.sublist(0, 3);
     return mostFavoriteBooks;
   }
+
+  List<String> getBookImage(List<String> productId) {
+    List<String> productImages = [];
+    for (int i = 0; i < books.length; i++) {
+      Book foundBook =
+          books.firstWhere((element) => element.id == productId[i]);
+      productImages.add(foundBook.images[0]);
+    }
+    return productImages;
+  }
 }

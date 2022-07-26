@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_book/services/books_service.dart';
 import 'package:get/get.dart';
 
+import '../models/cart.dart';
 import '../services/theme_service.dart';
 
-class CartItemWidget extends StatelessWidget {
-  const CartItemWidget({Key? key}) : super(key: key);
+class CartItemWidget extends StatefulWidget {
+  CartItemWidget({
+    Key? key,
+    required this.cart,
+  }) : super(key: key);
+  Cart cart;
 
+  @override
+  State<CartItemWidget> createState() => _CartItemWidgetState();
+}
+
+class _CartItemWidgetState extends State<CartItemWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -59,8 +70,7 @@ class CartItemWidget extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10.0),
                             image: DecorationImage(
                               fit: BoxFit.fill,
-                              image: NetworkImage(
-                                  'https://images-na.ssl-images-amazon.com/images/I/71d2WrAUznL.jpg'),
+                              image: NetworkImage(widget.cart.image!),
                             ),
                           )))),
               Positioned(
@@ -75,7 +85,7 @@ class CartItemWidget extends StatelessWidget {
                           Flexible(
                             flex: 2,
                             fit: FlexFit.tight,
-                            child: Text('Computer Programming',
+                            child: Text(widget.cart.title,
                                 style: TextStyle(fontSize: 20),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis),
@@ -83,7 +93,7 @@ class CartItemWidget extends StatelessWidget {
                           Flexible(
                             flex: 1,
                             child: Text(
-                              '200.000 VND',
+                              widget.cart.price.toString(),
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
@@ -91,7 +101,7 @@ class CartItemWidget extends StatelessWidget {
                           Flexible(
                             flex: 2,
                             child: Text(
-                              'cart_amount'.tr,
+                              'cart_amount'.tr + ' ${widget.cart.quantity}',
                               style: TextStyle(fontSize: 16),
                             ),
                           ),

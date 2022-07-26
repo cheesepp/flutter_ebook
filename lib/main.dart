@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_book/models/book.dart';
+import 'package:flutter_book/providers/cart_provider.dart';
 import 'package:flutter_book/screens/auth_screen/auth_screen.dart';
 import 'package:flutter_book/screens/book_details_screen/book_details_screen.dart';
 import 'package:flutter_book/screens/cart_screen.dart';
@@ -17,6 +18,7 @@ import 'package:flutter_book/widgets/main_drawer.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:flutter_book/const/theme_data.dart' as theme;
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:provider/provider.dart';
 import 'services/language_service.dart';
 
 void main() async {
@@ -48,24 +50,29 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     int _selectedIndex = 0;
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: theme.ThemeMode.lightTheme,
-      darkTheme: theme.ThemeMode.darkTheme,
-      themeMode: ThemeService().theme,
-      translations: I18nService(),
-      locale: I18nService().locale,
-      fallbackLocale: I18nService.fallbackLocale,
-      home: isOnboarding ? const OnboardingScreen() : AuthScreen(),
-      routes: {
-        HomeScreen.routeName: (ctx) => HomeScreen(),
-        CartScreen.routeName: (ctx) => CartScreen(),
-        EWalletScreen.routeName: (ctx) => const EWalletScreen(),
-        SettingScreen.routeName: (ctx) => SettingScreen(),
-        //       OrderScreen.routeName: (ctx) => OrderScreen(),
-        //       UserProductsScreen.routeName: (ctx) => UserProductsScreen(),
-        //       EditProductScreen.routeName: (ctx) => EditProductScreen(),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: ((context) => CartProvider()))
+      ],
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: theme.ThemeMode.lightTheme,
+        darkTheme: theme.ThemeMode.darkTheme,
+        themeMode: ThemeService().theme,
+        translations: I18nService(),
+        locale: I18nService().locale,
+        fallbackLocale: I18nService.fallbackLocale,
+        home: isOnboarding ? const OnboardingScreen() : AuthScreen(),
+        routes: {
+          HomeScreen.routeName: (ctx) => HomeScreen(),
+          CartScreen.routeName: (ctx) => CartScreen(),
+          EWalletScreen.routeName: (ctx) => const EWalletScreen(),
+          SettingScreen.routeName: (ctx) => SettingScreen(),
+          //       OrderScreen.routeName: (ctx) => OrderScreen(),
+          //       UserProductsScreen.routeName: (ctx) => UserProductsScreen(),
+          //       EditProductScreen.routeName: (ctx) => EditProductScreen(),
+        },
+      ),
     );
   }
 }

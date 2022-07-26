@@ -3,6 +3,7 @@ class Book {
   String name;
   List<dynamic> images;
   String? description;
+  double price;
   int? numberOfFavorite;
   bool isFavorite = false;
   dynamic rating = 0;
@@ -13,6 +14,7 @@ class Book {
   String? authorSurname;
   int pages;
   Book({
+    required this.price,
     required this.images,
     required this.id,
     required this.name,
@@ -32,6 +34,7 @@ class Book {
     // List<dynamic> imgFromJson = [];
     // json['images'].values((value) => imgFromJson.add(value));
     return Book(
+      price: json['price'],
       images: json['images'] as List<dynamic>,
       id: json['id'],
       name: json['name'],
@@ -50,6 +53,7 @@ class Book {
 
   Map toJson() => {
         'id': id,
+        'price': price,
         'name': name,
         'amount': amount,
         'description': description,
@@ -77,6 +81,7 @@ author: $author
 authorSurname: $authorSurname
 pages: $pages
 numberOfFavorite: $numberOfFavorite
+price: $price
 yearOfPublishcation: $yearOfPublishcation ---''';
   }
 }
