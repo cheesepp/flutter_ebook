@@ -18,9 +18,10 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     TabController _tabController =
         TabController(length: 2, vsync: this, initialIndex: 0);
+    print('rebuilt ${_tabController.index}');
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: NestedScrollView(
@@ -67,6 +68,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
             ];
           },
           body: TabBarView(
+            physics: NeverScrollableScrollPhysics(),
             controller: _tabController,
             children: [
               SignInPage(

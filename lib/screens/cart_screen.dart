@@ -21,18 +21,6 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   final _cartScaffoldKey = GlobalKey<ScaffoldState>();
-  List<String> productImages = [];
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    productImages = BooksService()
-        .getBookImage(Provider.of<CartProvider>(context).items.keys.toList());
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +59,7 @@ class _CartScreenState extends State<CartScreen> {
                 ),
                 ElevatedButton.icon(
                   onPressed: () {
-                    print("You pressed Icon Elevated Button");
+                    cart.clear();
                   },
                   icon: Icon(Icons.clear_all), //icon data for elevated button
                   label: Text("Clear all"), //label text
@@ -85,30 +73,6 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ),
                 ),
-                // Container(
-                //   width: 50,
-                //   height: 20,
-                //   padding: EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-                //   decoration: BoxDecoration(
-                //     color: Colors.white,
-                //     borderRadius: BorderRadius.circular(10),
-                //   ),
-                //   child: Row(
-                //     children: [
-                //       Icon(
-                //         Icons.clear_all,
-                //         color: Colors.black,
-                //       ),
-                //       SizedBox(
-                //         width: 10,
-                //       ),
-                //       Text(
-                //         'Clear all',
-                //         style: TextStyle(fontSize: 5, color: Colors.black),
-                //       ),
-                //     ],
-                //   ),
-                // ),
               ],
             ),
             const SizedBox(
@@ -125,6 +89,7 @@ class _CartScreenState extends State<CartScreen> {
                         itemBuilder: (context, index) {
                           return CartItemWidget(
                             cart: cart.items.values.toList()[index],
+                            bookId: cart.items.keys.toList()[index]
                           );
                         },
                         separatorBuilder: (context, index) {

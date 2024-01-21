@@ -6,10 +6,12 @@ import 'package:get/get.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:provider/provider.dart';
 import '../../models/book.dart';
+import '../cart_screen.dart';
 
 class BookDetailsScreen extends StatefulWidget {
   BookDetailsScreen({Key? key, required this.book}) : super(key: key);
   Book book;
+
   @override
   State<BookDetailsScreen> createState() => _BookDetailsScreenState();
 }
@@ -19,6 +21,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
   double? _scale;
   AnimationController? _controller;
   int _currentIndex = 0;
+
   void onPageChange(int index) {
     setState(() {
       _currentIndex = index;
@@ -48,6 +51,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
 
   final panelController = PanelController();
   final double tabBarHeight = 80;
+
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartProvider>(context);
@@ -59,45 +63,50 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
-          Container(
-            height: 50.0,
-            width: 50.0,
-            child: GestureDetector(
-                onTap: () {},
-                child: Stack(
-                  children: <Widget>[
-                    const IconButton(
-                      icon: Icon(
-                        Icons.shopping_cart,
-                        color: Colors.black,
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, CartScreen.routeName);
+            },
+            child: Container(
+              height: 50.0,
+              width: 50.0,
+              child: GestureDetector(
+                  onTap: () {},
+                  child: Stack(
+                    children: <Widget>[
+                      const IconButton(
+                        icon: Icon(
+                          Icons.shopping_cart,
+                          color: Colors.black,
+                        ),
+                        onPressed: null,
                       ),
-                      onPressed: null,
-                    ),
-                    Positioned(
-                      child: Stack(
-                        children: [
-                          Positioned(
-                              left: 26,
-                              top: 0,
-                              child: Icon(Icons.brightness_1,
-                                  size: 20.0, color: Colors.red)),
-                          Positioned(
-                              top: 2.0,
-                              right: 10,
-                              child: Center(
-                                child: Text(
-                                  cart.items.length.toString(),
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 11.0,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              )),
-                        ],
+                      Positioned(
+                        child: Stack(
+                          children: [
+                            Positioned(
+                                left: 26,
+                                top: 0,
+                                child: Icon(Icons.brightness_1,
+                                    size: 20.0, color: Colors.red)),
+                            Positioned(
+                                top: 2.0,
+                                right: 10,
+                                child: Center(
+                                  child: Text(
+                                    cart.items.length.toString(),
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 11.0,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                )),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                )),
+                    ],
+                  )),
+            ),
           ),
         ],
       ),
@@ -107,10 +116,39 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
             controller: panelController,
             maxHeight: MediaQuery.of(context).size.height - 100,
             panelBuilder: (scrollController) => buildSlidingPanel(
-              scrollController: scrollController,
+              // scrollController: scrollController,
               panelController: panelController,
             ),
-            body: MainImageWidget(widget.book.images, onPageChange),
+            body: Stack(
+              children: [
+                MainImageWidget(widget.book.images, onPageChange),
+                Positioned(
+                  left: 80,
+                  right: 0,
+                  bottom: 130,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: SizedBox(
+                      height: 50,
+                      child: Container(
+                        margin: const EdgeInsets.only(left: 80),
+                        padding: const EdgeInsets.symmetric(vertical: 24),
+                        alignment: Alignment.center,
+                        child: ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: widget.book.images.length,
+                            itemBuilder: (context, index) {
+                              return buildIndicator(
+                                index == _currentIndex,
+                              );
+                            }),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           Positioned(
             bottom: 70,
@@ -139,31 +177,6 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
               ),
             ),
           ),
-          Positioned(
-            left: 80,
-            right: 0,
-            bottom: 130,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: SizedBox(
-                height: 50,
-                child: Container(
-                  margin: const EdgeInsets.only(left: 80),
-                  padding: const EdgeInsets.symmetric(vertical: 24),
-                  alignment: Alignment.center,
-                  child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: widget.book.images.length,
-                      itemBuilder: (context, index) {
-                        return buildIndicator(
-                          index == _currentIndex,
-                        );
-                      }),
-                ),
-              ),
-            ),
-          )
         ],
       ),
     );
@@ -171,47 +184,46 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
 
   Widget buildSlidingPanel({
     required PanelController panelController,
-    required ScrollController scrollController,
+    // required ScrollController scrollController,
   }) =>
       Scaffold(
-        body: Stack(children: [
-          Column(
-            children: [
-              const SizedBox(
-                height: 20,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: GestureDetector(
+                  onTap: panelController.open, child: buildDragIcon()),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              margin: const EdgeInsets.only(right: 150),
+              child: Text(
+                widget.book.name,
+                style: TextStyle(fontSize: 20),
               ),
-              Align(
-                alignment: Alignment.center,
-                child: GestureDetector(
-                    onTap: panelController.open, child: buildDragIcon()),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Text('Description'),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              margin: const EdgeInsets.only(right: 150),
+              child: Text(
+                widget.book.description!,
+                style: TextStyle(fontSize: 15),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                margin: const EdgeInsets.only(right: 150),
-                child: Text(widget.book.name,
-                    style: TextStyle(fontSize: 20),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Text('Description'),
-              const SizedBox(
-                height: 15,
-              ),
-              Container(
-                margin: const EdgeInsets.only(right: 150),
-                child: Text(widget.book.description!,
-                    style: TextStyle(fontSize: 15),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis),
-              ),
-            ],
-          ),
-        ]),
+            ),
+          ],
+        ),
       );
 
   Widget buildDragIcon() => Container(
