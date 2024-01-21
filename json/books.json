@@ -1,0 +1,71 @@
+[
+    {
+        "id": "a1",
+        "name": "Computer Programming",
+        "amount": 14,
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,",
+        "isFavorite": false,
+        "rating": 4.4,
+        "author": "loren",
+        "pages": 400,
+        "numberOfFavorite": 45,
+        "yearOfPublishcation": 1994,
+        "authorSurname": "Kim Dong",
+        "images": [
+            "https://images-na.ssl-images-amazon.com/images/I/71d2WrAUznL.jpg",
+            "https://images-na.ssl-images-amazon.com/images/I/71hh5-9mZJL.jpg"
+        ]
+    },
+    {
+        "id": "a2",
+        "name": "Computer Programming",
+        "amount": 14,
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,",
+        "isFavorite": false,
+        "rating": 4.4,
+        "author": "loren",
+        "pages": 400,
+        "numberOfFavorite": 45,
+        "yearOfPublishcation": 1994,
+        "authorSurname": "Kim Dong",
+        "images": [
+            "https://images-na.ssl-images-amazon.com/images/I/71d2WrAUznL.jpg",
+            "https://images-na.ssl-images-amazon.com/images/I/71hh5-9mZJL.jpg"
+        ]
+    },
+    {
+        "id": "a3",
+        "name": "Computer Programming",
+        "amount": 14,
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,",
+        "isFavorite": false,
+        "rating": 4.4,
+        "author": "loren",
+        "pages": 400,
+        "numberOfFavorite": 45,
+        "yearOfPublishcation": 1994,
+        "authorSurname": "Kim Dong",
+        "images": [
+            "https://images-na.ssl-images-amazon.com/images/I/71d2WrAUznL.jpg",
+            "https://images-na.ssl-images-amazon.com/images/I/71hh5-9mZJL.jpg"
+        ]
+    },
+    {
+        "id": "a4",
+        "name": "Computer Programming",
+        "amount": 14,
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,",
+        "isFavorite": false,
+        "rating": 4.4,
+        "author": "loren",
+        "pages": 400,
+        "numberOfFavorite": 45,
+        "yearOfPublishcation": 1994,
+        "authorSurname": "Kim Dong",
+        "images": [
+            "https://hanoiscrum.net/hnscrum/images/learn/thecleancoder.PNG",
+            "https://images-na.ssl-images-amazon.com/images/I/71hh5-9mZJL.jpg"
+        ]
+    }
+
+]
